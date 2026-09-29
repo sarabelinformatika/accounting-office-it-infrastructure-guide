@@ -1,8 +1,22 @@
 # Accounting Office IT Infrastructure Guide
 
 <p align="center">
-  <img src="images/accounting-office-it-infrastructure-guide.png" alt="Accounting Office IT Infrastructure Guide">
+  <img src="images/accounting-office-it-infrastructure-guide.jpg" alt="Accounting Office IT Infrastructure Guide">
 </p>
+
+![Platform](https://img.shields.io/badge/Platform-Windows%20Server-0078D4?style=flat-square)
+![Windows Server](https://img.shields.io/badge/Windows%20Server-2025%20%7C%202022-0078D4?style=flat-square)
+![Identity](https://img.shields.io/badge/Identity-Active%20Directory-2EA44F?style=flat-square)
+![Scope](https://img.shields.io/badge/Scope-Production-2EA44F?style=flat-square)
+![Method](https://img.shields.io/badge/Method-Audit%20%7C%20Pilot%20%7C%20Enforce-0086C9?style=flat-square)
+
+[![Release](https://img.shields.io/github/v/release/sarabelinformatika/accounting-office-it-infrastructure-guide?style=flat-square&label=release)](https://github.com/sarabelinformatika/accounting-office-it-infrastructure-guide/releases)
+[![Stars](https://img.shields.io/github/stars/sarabelinformatika/accounting-office-it-infrastructure-guide?style=flat-square)](https://github.com/sarabelinformatika/accounting-office-it-infrastructure-guide/stargazers)
+[![Forks](https://img.shields.io/github/forks/sarabelinformatika/accounting-office-it-infrastructure-guide?style=flat-square)](https://github.com/sarabelinformatika/accounting-office-it-infrastructure-guide/network/members)
+
+[![Issues](https://img.shields.io/github/issues/sarabelinformatika/accounting-office-it-infrastructure-guide?style=flat-square)](https://github.com/sarabelinformatika/accounting-office-it-infrastructure-guide/issues)
+[![Last commit](https://img.shields.io/github/last-commit/sarabelinformatika/accounting-office-it-infrastructure-guide?style=flat-square)](https://github.com/sarabelinformatika/accounting-office-it-infrastructure-guide/commits/main)
+[![License](https://img.shields.io/github/license/sarabelinformatika/accounting-office-it-infrastructure-guide?style=flat-square)](LICENSE)
 
 A production-oriented guide for designing, operating, securing, monitoring, backing up, and recovering the IT environment of an accounting office.
 
