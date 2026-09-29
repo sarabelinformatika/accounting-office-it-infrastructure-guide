@@ -1,0 +1,13 @@
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+*.bak
+*.log
+reports/
+evidence/
+.DS_Store
+Thumbs.db

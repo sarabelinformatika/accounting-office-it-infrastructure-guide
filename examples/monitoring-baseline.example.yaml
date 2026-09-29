@@ -1,0 +1,28 @@
+checks:
+  - name: critical-service-availability
+    interval: 60s
+    severity: high
+    owner: infrastructure-operations
+  - name: backup-age
+    interval: 1h
+    severity: disaster
+    owner: backup-operations
+  - name: filesystem-capacity
+    interval: 5m
+    warning: 80
+    critical: 90
+    owner: infrastructure-operations
+  - name: certificate-expiry
+    interval: 12h
+    warning_days: 30
+    critical_days: 14
+    owner: infrastructure-operations
+  - name: endpoint-protection-health
+    interval: 15m
+    severity: high
+    owner: security-operations
+
+alerting:
+  primary: monitored-ticket-channel
+  critical_secondary: out-of-band-channel
+  test_frequency: quarterly

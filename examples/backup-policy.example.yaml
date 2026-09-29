@@ -1,0 +1,26 @@
+policy:
+  name: accounting-office-production
+  rpo_hours: 24
+  rto_hours: 8
+  encryption: required
+  application_consistency: required
+  offsite_copy: required
+  immutable_or_offline_copy: required
+
+retention:
+  keep_last: 3
+  daily: 7
+  weekly: 4
+  monthly: 12
+
+verification:
+  automated_integrity: weekly
+  file_restore: monthly
+  application_restore: quarterly
+  full_recovery_exercise: annually
+
+alerts:
+  failed_job: immediate
+  missed_schedule: immediate
+  repository_capacity: warning_at_80_percent
+  stale_restore_point_hours: 26

@@ -1,0 +1,73 @@
+name: Validate guide
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Validate shell syntax
+        run: bash -n scripts/*.sh
+
+      - name: Run ShellCheck
+        run: shellcheck scripts/*.sh
+
+      - name: Validate YAML
+        run: |
+          ruby -e 'require "yaml"; Dir["**/*.{yml,yaml}"].each { |f| YAML.load_stream(File.read(f)); puts "OK #{f}" }'
+
+      - name: Check local Markdown links
+        shell: python
+        run: |
+          import pathlib
+          import re
+          import sys
+          from urllib.parse import unquote
+
+          root = pathlib.Path.cwd()
+          failures = []
+          pattern = re.compile(r"!?(?:\[[^]]*\])\(([^)]+)\)")
+
+          for document in root.rglob("*.md"):
+              text = document.read_text(encoding="utf-8")
+              for raw_target in pattern.findall(text):
+                  target = raw_target.strip().split(maxsplit=1)[0].strip("<>")
+                  if target.startswith(("#", "http://", "https://", "mailto:", "tel:")):
+                      continue
+                  path_part = unquote(target.split("#", 1)[0])
+                  if not path_part:
+                      continue
+                  resolved = (document.parent / path_part).resolve()
+                  try:
+                      resolved.relative_to(root)
+                  except ValueError:
+                      failures.append(f"{document}: link escapes repository: {target}")
+                      continue
+                  if not resolved.exists():
+                      failures.append(f"{document}: missing target: {target}")
+
+          if failures:
+              print("\n".join(failures), file=sys.stderr)
+              raise SystemExit(1)
+
+          print("All local Markdown links resolve.")
+
+      - name: Check for committed secret files
+        run: |
+          if find . -type f \( -name '.env' -o -name '*.key' -o -name '*.pem' -o -name '*.p12' -o -name '*.pfx' \) -print -quit | grep -q .; then
+            echo 'Potential secret file committed.' >&2
+            exit 1
+          fi
+
+      - name: Check whitespace errors
+        run: git diff --check

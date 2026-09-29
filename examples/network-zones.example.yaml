@@ -1,0 +1,39 @@
+zones:
+  users:
+    cidr: 192.0.2.0/25
+    purpose: Managed endpoints
+  servers:
+    cidr: 192.0.2.128/27
+    purpose: Identity, file, application, and database services
+  management:
+    cidr: 192.0.2.160/28
+    purpose: Infrastructure administration
+  backup:
+    cidr: 192.0.2.176/28
+    purpose: Backup repositories and copy targets
+  guest:
+    cidr: 192.0.2.192/26
+    purpose: Internet-only guest and unmanaged devices
+
+rules:
+  - source: users
+    destination: servers
+    services:
+      - dns
+      - kerberos
+      - ldap-or-ldaps
+      - smb
+      - rdp-gateway-or-approved-session-host
+    approval: required
+  - source: management
+    destination: servers
+    services:
+      - approved-administration
+    approval: privileged-access
+  - source: guest
+    destination: internet
+    services:
+      - dns
+      - http
+      - https
+    approval: default
